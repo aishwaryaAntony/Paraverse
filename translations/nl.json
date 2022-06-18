@@ -1,0 +1,23 @@
+{
+   "homeScreen": {
+      "NFTS WITH": "NFTS WITHSS",
+      "REAL DIGITAL":"REAL DIGITALSS",
+      "VALUE":"VALUESS",
+      "REAL WORLD":"REAL WORLDSS"     
+   },
+  "scanScreen": {
+     "Registration": "Registration"      
+  },
+  "myCollectionScreen": {
+     "Enter Mobile Number": "Enter Mobile Number"
+    
+  },
+  "walletScreen": {
+     "Enter Security Verification Code": "Enter Security Verification Code"
+     
+  },
+  "profileScreen": {
+     "Scan": "Scan a government-issued photo ID (e.g. Driver’s license, Passport, etc.)"
+     
+  }
+}

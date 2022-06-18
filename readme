@@ -1,0 +1,110 @@
+RNCamera’s 
+--------------------------------------------
+         
+    1 RNCamera’s setup for Android
+    ----------------------------------------------
+           
+       1 RNCamera’s : Enable permission in android/app/build.gradle 
+        -------------------------------------------
+           missingDimensionStrategy 'react-native-camera', 'general'    
+     eg
+              defaultConfig {
+                  applicationId "com.confirmd"                 
+                  missingDimensionStrategy 'react-native-camera', 'general' //add line 
+                
+              }
+
+
+        2 RNCamera’s: Enable permission in AndroidManifest
+          ------------------------------------------------------------------------          
+          <uses-permission android:name="android.permission.CAMERA"/>         
+
+
+       RNCamera’s setup for iOS
+     ----------------------------------------
+
+       1 RNCamera’s : Enable permission in ios plist file 
+       --------------------------------------
+       <key>NSCameraUsageDescription</key>
+       <string>${PRODUCT_NAME} Camera Usage</string>   
+       --------------------------------------
+       APK Generation--Commands
+          (Mac)--->cd android && ./gradlew assembleRelease ---->(for creating a apk file in terminal)
+          (Windows)--->cd android && gradlew assembleRelease ---->(for creating a apk file in terminal)
+          paraverse-->android-->app-->build-->outputs-->apk--->(release--->paraverse.apk--->to get apk file)
+
+Wallet Connect Setup:
+----------------------
+
+Step: 1 - Install the below
+>   npx rn-nodeify --install --hack
+>   npm install @walletconnect/react-native-dapp
+>   npm install react-native-svg @react-native-async-storage/async-storage
+
+Fix the bugs:
+1.  react-native-os
+    a.  Go to build.gradle - change compile to implementation
+
+    b.  Go to : \node_modules\react-native-os\android\src\main\java\com\peel\react\RNOSModule.java
+        Change implements to extends
+
+        from -  public final class RNOSModule implements ReactPackage
+
+        to -    public final class RNOSModule extends ReactPackage
+
+
+2.  react-native-randombytes
+    change the below line in android/build.gradle
+        from -  compile 'com.facebook.react:react-native:0.13.+'
+        to -    implementation 'com.facebook.react:react-native:0.68.2'
+
+3.  react-native-tcp
+    a. change the below dependency lines in android/build.gradle
+        from -  compile 'com.facebook.react:react-native:+'
+                compile 'com.koushikdutta.async:androidasync:2.1.6'
+
+        to -    implementation 'com.facebook.react:react-native:+'
+                implementation 'com.koushikdutta.async:androidasync:2.1.6'
+
+    b.  Go to: \node_modules\react-native-tcp\android\src\main\java\com\peel\react\TcpSocketsModule.java
+        change the below
+        from -  public final class TcpSocketsModule implements ReactPackage
+
+        to -    public final class TcpSocketsModule extends ReactPackage
+
+4.  react-native-udp
+    a.    change the below dependency lines in android/build.gradle
+        from -  compile fileTree(dir: 'libs', include: ['*.jar'])
+                compile 'com.android.support:appcompat-v7:23.0.1'
+                compile 'com.facebook.react:react-native:0.11.+'
+
+        to -    implementation fileTree(dir: 'libs', include: ['*.jar'])
+                implementation 'com.android.support:appcompat-v7:23.0.1'
+                implementation 'com.facebook.react:react-native:0.68.2'
+
+    b.  Go to: \node_modules\react-native-udp\android\src\main\java\com\tradle\react\UdpSocketsModule.java
+        change the below
+        from -  public final class UdpSocketsModule implements ReactPackage
+
+        to -    public final class UdpSocketsModule extends ReactPackage
+
+5. node_modules/@walletconnect/react-native-dapp/dist/providers/WalletConnectProvider.js
+
+   comment below lines:
+   ---------------------
+
+         if (!canOpenURL) {
+                Linking.openURL('https://walletconnect.org/wallets');
+                throw new Error('No wallets found.');
+         }  
+
+
+
+ Use commands to generate Apk file 
+ ----------------------------------
+ cd android && ./gradlew app:assembleRelease
+
+
+
+
+
